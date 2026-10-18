@@ -64,12 +64,14 @@ class TestBooksCollector:
         collector.add_new_book("Мульт про смешариков")
         collector.set_book_genre("Мульт про смешариков", "Мультфильмы")
 
-        collector.add_new_book("Шерлок Холмс")
-        collector.set_book_genre("Шерлок Холмс", "Детективы")  # есть возрастной рейтинг
-
         result = collector.get_books_for_children()
         assert "Мульт про смешариков" in result
-        assert "Шерлок Холмс" not in result
+    def test_get_books_for_children_with_rating(self, collector):
+         collector.add_new_book("Шерлок Холмс")
+         collector.set_book_genre("Шерлок Холмс", "Детективы")  # есть возрастной рейтинг
+        
+         result = collector.get_books_for_children()
+         assert "Шерлок Холмс" not in result
 
     def test_add_book_in_favorites_valid(self, collector):
         #Тест добавления книги в избранное (книга есть в коллекции)
